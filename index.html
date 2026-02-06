@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KoPinggiran - Kopi & Teh Terbaik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            10% {
+                transform: rotate(14deg);
+            }
+            20% {
+                transform: rotate(-8deg);
+            }
+            30% {
+                transform: rotate(14deg);
+            }
+            40% {
+                transform: rotate(-4deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            60% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.15);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(217, 119, 6, 0.8);
+            }
+        }
+
+        @keyframes blob1 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        @keyframes blob2 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(-40px, 30px) scale(0.9);
+            }
+            66% {
+                transform: translate(20px, -40px) scale(1.1);
+            }
+        }
+
+        @keyframes blob3 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(25px, 25px) scale(1.05);
+            }
+            66% {
+                transform: translate(-30px, -20px) scale(0.95);
+            }
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(217, 119, 6, 0.02) 10px, rgba(217, 119, 6, 0.02) 20px);
+            pointer-events: none;
+        }
+
+        /* Blob Container */
+        .blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            mix-blend-mode: multiply;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            animation: blob1 7s infinite;
+        }
+
+        .blob-2 {
+            animation: blob2 8s infinite;
+        }
+
+        .blob-3 {
+            animation: blob3 9s infinite;
+        }
+
+        .hero h1 {
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .zoom-in {
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        .rotate-in {
+            animation: rotateIn 0.8s ease-out;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .bounce-animation {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* Scroll Animation Classes */
+        [data-animate] {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        [data-animate].show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Animation for Menu Items */
+        .menu-item {
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        .menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .menu-item:nth-child(2) { animation-delay: 0.2s; }
+        .menu-item:nth-child(3) { animation-delay: 0.3s; }
+        .menu-item:nth-child(4) { animation-delay: 0.4s; }
+        .menu-item:nth-child(5) { animation-delay: 0.5s; }
+        .menu-item:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Menu Item Shine Effect */
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .menu-item:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced button animations */
+        .menu-item button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .menu-item button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Testimonial Card Animations */
+        .testimonial-card {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Nav Link Animation */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fcd34d, #f59e0b);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* CTA Button Advanced Hover */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Contact Card Glow */
+        .contact-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 1rem;
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Image Scale on Scroll */
+        .image-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .image-scale:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Pulse Animation for Special Elements */
+        .pulse-glow {
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        /* Gradient Text Animation */
+        .gradient-text {
+            background: linear-gradient(45deg, #b45309, #d97706, #f59e0b, #b45309);
+            background-size: 300% 300%;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Slower bounce for hero */
+        .animate-bounce-slow {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Link hover underline */
+        a[href^="#"] {
+            position: relative;
+        }
+
+        /* Increase specificity for section headings */
+        section h2[data-animate] {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        /* Image hover effects */
+        .image-scale img {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Hamburger & mobile menu */
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; border: none; background: transparent; padding: 4px; align-items: center; justify-content: center; overflow: visible; }
+        .hamburger span { display: block; width: 26px; height: 3px; background: #ffffff; border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
+        .hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        /* place mobile menu fixed under the navbar (nav height = 80px) so it is visible when scrolled */
+        .mobile-menu { position: fixed; left: 0; right: 0; top: 80px; background: rgba(255,255,255,0.98); box-shadow: 0 10px 30px rgba(2,6,23,0.08); overflow: hidden; max-height: 0; transition: max-height .28s ease, transform .25s ease; z-index: 60; }
+        .mobile-menu.active { max-height: calc(100vh - 80px); }
+        .mobile-menu ul { display: flex; flex-direction: column; gap: 0; padding: 0.5rem 1rem; }
+        .mobile-menu a { display: block; padding: 0.85rem 0.5rem; color: #111827; text-decoration: none; border-bottom: 1px solid rgba(15,23,42,0.05); }
+        .mobile-menu a:hover { background: rgba(15,23,42,0.03); }
+
+        @media (max-width: 767px) {
+            .hamburger { display: flex; }
+            nav .hidden.md\:flex { display: none !important; }
+        }
+    </style>
+
+</head>
+<body class="bg-amber-50 text-gray-900">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-r from-amber-900 via-amber-800 to-amber-950 shadow-2xl backdrop-blur-sm bg-opacity-95">
+        <div class="max-w-8xl px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20 mx-auto">
+            <a href="#" class="text-2xl font-bold text-amber-200 flex items-center gap-2 hover:text-white transition-colors duration-300">
+                 <span class="italic">KoPinggiran</span>
+            </a>
+            <ul class="hidden md:flex gap-12 ml-auto justify-end">
+                <li><a href="#home" class="text-amber-50 font-medium hover:text-amber-200 transition-colors duration-300">Home</a></li>
+                <li><a href="#about" class="text-amber-50 font-medium hover:text-amber-200 transition-colors duration-300">About</a></li>
+                <li><a href="#menu" class="text-amber-50 font-medium hover:text-amber-200 transition-colors duration-300">Menu</a></li>
+                <li><a href="#contact" class="text-amber-50 font-medium hover:text-amber-200 transition-colors duration-300">Contact</a></li>
+            </ul>
+                <!-- Hamburger (mobile) -->
+                <button class="hamburger md:hidden" aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu" type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+        </div>
+    </nav>
+
+        <!-- Mobile menu dropdown -->
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="h-screen pt-40 pb-32 px-4 bg-gradient-to-br from-amber-900 via-amber-950 to-black text-white text-center relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 opacity-20 bg-pattern"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="flex justify-between my-auto">
+            <div class="relative z-10 mx-auto my-auto items-center">
+                <h1 class="text-6xl md:text-7xl font-black mb-8 drop-shadow-2xl text-amber-50">Selamat Datang di KoPinggiran</h1>
+                <p class="text-xl md:text-2xl mb-10 text-amber-100 leading-relaxed font-light tracking-wide" data-animate>Kopi <span class="text-amber-300 underline">Pinggiran</span> yang selalu siap menjadi sandaran</p>
+                <a href="#menu" class="z-[999] cta-button inline-block bg-gradient-to-r from-amber-200 to-amber-300 text-amber-900 px-12 py-4 rounded-full font-bold hover:from-white hover:to-amber-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 shadow-lg">
+                    Jelajahi Menu Kami
+                </a>
+            </div>
+            <div class="hidden md:hidden lg:flex relative justify-center">
+                <img src="assets/img/Vector.png" class="absolute" style="transform: translateX(50px);">
+                <img src="assets/img/cappuccino.png" class="" alt="kopi enak" width="850px" style="transform: translateY(50px);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="about" class="py-32 px-4 bg-white relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="blob blob-1 top-10 left-5 w-80 h-80 bg-amber-200" style="opacity: 0.15;"></div>
+        <div class="blob blob-2 bottom-0 right-10 w-96 h-96 bg-amber-100" style="opacity: 0.12;"></div>
+        <div class="blob blob-3 top-1/2 left-1/3 w-72 h-72 bg-amber-300" style="opacity: 0.1;"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-5xl font-black text-center text-amber-900 mb-16 relative pb-6 fade-in-up">
+                Tentang Kami
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-amber-300 to-amber-600"></span>
+            </h2>
+            
+            <!-- Business Description -->
+            <div class="mb-16 text-center max-w-3xl mx-auto" data-animate>
+                <h3 class="text-2xl font-bold text-amber-900 mb-4">Tentang KoPinggiran</h3>
+                <p class="text-gray-700 mb-5 leading-relaxed text-base font-light">KoPinggiran adalah sebuah coffee shop dan tea house yang didedikasikan untuk menyajikan minuman berkualitas premium dengan standar internasional. Kami berkomitmen untuk memberikan pengalaman terbaik kepada setiap pelanggan melalui produk berkualitas tinggi, layanan profesional, dan suasana yang nyaman dan ramah.</p>
+            </div>
+
+            <!-- History -->
+            <div class="mb-16 bg-amber-50 rounded-2xl p-8 shadow-lg" data-animate>
+                <h3 class="text-2xl font-bold text-amber-900 mb-4">Sejarah Singkat</h3>
+                <p class="text-gray-700 mb-4 leading-relaxed text-base font-light">KoPinggiran dimulai dari sebuah impian sederhana pada tahun 2021 oleh sekelompok pecinta kopi yang ingin membawa pengalaman kopi specialty ke komunitas lokal. Kami memulai dengan mencari biji kopi terbaik dari berbagai perkebunan organik di seluruh Indonesia dan dunia, memastikan setiap biji dipilih dengan cermat untuk menghasilkan cita rasa yang luar biasa.</p>
+                <p class="text-gray-700 leading-relaxed text-base font-light">Melalui dedikasi, pembelajaran berkelanjutan, dan komitmen terhadap kualitas, KoPinggiran berkembang menjadi coffee shop favorit di kawasan ini. Kami terus berinovasi dalam menyajikan menu minuman yang beragam, dari kopi klasik hingga teh specialty organik, dengan tetap mempertahankan filosofi kami: "Setiap cangkir adalah cerita, setiap tegukan adalah petualangan."</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center" data-animate>
+                <!-- Story telling -->
+                <div class="slide-in-right">
+                    <h3 class="text-3xl font-black text-amber-900 mb-6 leading-tight gradient-text">Biji Kopi Pilihan Terbaik</h3>
+                    <p class="text-gray-700 mb-5 leading-relaxed text-lg font-light">KoPinggiran adalah coffee shop yang mengkhususkan diri dalam menyajikan kopi dan teh berkualitas premium. Kami menggunakan biji kopi organik pilihan dari kebun-kebun terbaik Indonesia dan dunia.</p>
+                    <p class="text-gray-700 mb-5 leading-relaxed text-lg font-light">Dengan barista berpengalaman dan suasana yang nyaman, kami menciptakan pengalaman minum kopi yang tak terlupakan. Setiap cangkir yang kami sajikan adalah hasil dari dedikasi dan passion terhadap kualitas.</p>
+                    <p class="text-gray-700 leading-relaxed text-lg font-light">Bergabunglah dengan komunitas pecinta kopi kami dan rasakan perbedaannya!</p>
+                </div>
+                <div class="relative h-80 flex items-center justify-center fade-in-up rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="assets/img/kopi.avif" alt="Kopi Premium" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-30"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="py-32 px-4 bg-gradient-to-br from-amber-50 via-white to-amber-50 relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-pattern opacity-40"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="blob blob-2 -top-10 -right-20 w-80 h-80 bg-amber-300" style="opacity: 0.15;"></div>
+        <div class="blob blob-1 bottom-10 left-10 w-96 h-96 bg-amber-200" style="opacity: 0.12;"></div>
+        <div class="blob blob-3 top-1/2 right-1/4 w-72 h-72 bg-amber-400" style="opacity: 0.08;"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-5xl font-black text-center text-amber-900 mb-16 relative pb-6 fade-in-up">
+                Menu Spesial Kami
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-amber-300 to-amber-600"></span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Espresso Premium -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="assets/img/espresso.avif" alt="Espresso Premium" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Espresso Premium</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Espresso murni dengan cita rasa kuat dan kaya. Dipanggang fresh setiap hari untuk hasil terbaik.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 25K</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cappuccino Latte -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop" alt="Cappuccino Latte" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Cappuccino Latte</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Perpaduan sempurna antara espresso, susu, dan busa lembut yang creamy dan smooth.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 35K</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Green Tea Organik -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="assets/img/matcha.avif" alt="Green Tea Organik" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Matcha Latte</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Teh hijau organik pilihan yang kaya akan antioksidan dan menyegarkan tubuh Anda.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 20K</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Iced Coffee -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="assets/img/americano.avif" alt="Iced Coffee" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Iced Coffee</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Kopi dingin yang sempurna untuk hari yang panas. Disajikan dengan es dan susu pilihan.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 30K</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cake & Pastry -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=350&fit=crop" alt="Cake & Pastry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Cake & Pastry</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Berbagai pilihan kue dan pastry segar yang dibuat setiap hari. Cocok menemani kopi Anda.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 35K+</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Herbal Blend -->
+                <div class="menu-item bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 hover:bg-amber-50 group">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden bg-gray-200">
+                        <img src="assets/img/caramel.webp" alt="Herbal Blend" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors">Caramel Macchiato</h3>
+                        <p class="text-gray-600 text-sm mb-5 leading-relaxed font-light">Nikmatnya kopi yang dipadukan dengan manisnya karamel.</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-3xl font-black text-amber-700">Rp 22K</p>
+                            <button class="bg-amber-700 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni -->
+    <section class="py-32 px-4 bg-white relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="blob blob-1 top-0 right-10 w-80 h-80 bg-amber-200" style="opacity: 0.15;"></div>
+        <div class="blob blob-2 bottom-20 left-5 w-96 h-96 bg-amber-100" style="opacity: 0.12;"></div>
+        <div class="blob blob-3 top-1/3 right-1/3 w-72 h-72 bg-amber-300" style="opacity: 0.1;"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-5xl font-black text-center text-amber-900 mb-16 relative pb-6 fade-in-up">
+                Apa Kata Pelanggan Kami
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-amber-300 to-amber-600"></span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-gradient-to-br from-amber-50 to-white p-8 rounded-2xl border-l-4 border-amber-400 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold">👤</div>
+                        <div>
+                            <p class="font-bold text-amber-900">Budi Santoso</p>
+                            <p class="text-xs text-gray-600">Pelanggan Setia</p>
+                        </div>
+                    </div>
+                    <div class="text-amber-600 text-2xl mb-4">★★★★★</div>
+                    <p class="text-gray-700 leading-relaxed font-light">"Kopi terbaik yang pernah saya minum! Barista di sini sangat profesional dan ramah. Suasananya juga sangat nyaman untuk bekerja atau bersantai."</p>
+                </div>
+
+                <div class="testimonial-card bg-gradient-to-br from-amber-50 to-white p-8 rounded-2xl border-l-4 border-amber-400 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold">👩</div>
+                        <div>
+                            <p class="font-bold text-amber-900">Siti Nurhaliza</p>
+                            <p class="text-xs text-gray-600">Pegawai Kantoran</p>
+                        </div>
+                    </div>
+                    <div class="text-amber-600 text-2xl mb-4">★★★★★</div>
+                    <p class="text-gray-700 leading-relaxed font-light">"KoPinggiran adalah tempat favorit saya untuk melepas penat. Secangkir kopi mereka dan suasana tenang yang menenangkan adalah kombinasi sempurna."</p>
+                </div>
+
+                <div class="testimonial-card bg-gradient-to-br from-amber-50 to-white p-8 rounded-2xl border-l-4 border-amber-400 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold">👨</div>
+                        <div>
+                            <p class="font-bold text-amber-900">Ahmad Rahman</p>
+                            <p class="text-xs text-gray-600">Freelancer</p>
+                        </div>
+                    </div>
+                    <div class="text-amber-600 text-2xl mb-4">★★★★★</div>
+                    <p class="text-gray-700 leading-relaxed font-light">"Kualitas kopi yang konsisten, harga yang reasonable, dan pelayanan yang luar biasa. Saya sangat merekomendasikan KoPinggiran kepada semua orang!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="contact" class="py-32 px-4 bg-gradient-to-br from-amber-900 via-amber-950 to-black text-white text-center relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-pattern opacity-30"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="blob blob-1 top-20 right-10 w-72 h-72 bg-amber-600" style="opacity: 0.2;"></div>
+        <div class="blob blob-2 bottom-0 left-10 w-80 h-80 bg-amber-700" style="opacity: 0.18;"></div>
+        <div class="blob blob-3 top-1/2 right-1/3 w-96 h-96 bg-amber-800" style="opacity: 0.12;"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-5xl font-black mb-16 relative pb-6 inline-block">
+                Hubungi Kami
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-amber-300 to-amber-400"></span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="contact-card p-8 rounded-2xl bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-all duration-300 transform hover:-translate-y-2 border border-white border-opacity-20 group">
+                <a href="https://maps.app.goo.gl/kXtMhRiVFQDtqkDH8">
+                        <h3 class="text-3xl font-black text-amber-200 mb-4 group-hover:text-white transition-colors">📍 Lokasi</h3>
+                        <p class="mb-2 text-base font-light">Jl. Taman Kopi No. 42</p>
+                        <p class="text-base font-light">Kabupaten Tangerang</p>
+                    </a>
+                </div>
+
+                <div class="contact-card p-8 rounded-2xl bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-all duration-300 transform hover:-translate-y-2 border border-white border-opacity-20 group">
+                    <h3 class="text-3xl font-black text-amber-200 mb-4 group-hover:text-white transition-colors">⏰ Jam Operasional</h3>
+                    <p class="mb-2 text-base font-light">Senin - Jumat: 07:00 - 20:00</p>
+                    <p class="text-base font-light">Sabtu - Minggu: 08:00 - 21:00</p>
+                </div>
+
+                <div class="contact-card p-8 rounded-2xl bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-all duration-300 transform hover:-translate-y-2 border border-white border-opacity-20 group">
+                    <h3 class="text-3xl font-black text-amber-200 mb-4 group-hover:text-white transition-colors">📞 Kontak</h3>
+                    <p class="mb-2 text-base font-light">WhatsApp: 0813-9877-2337</p>
+                    <p class="text-base font-light">Email: info@gardenweb.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-black via-gray-900 to-black text-white text-center py-12 border-t-4 border-amber-700 relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-pattern opacity-30"></div>
+        
+        <!-- Decorative Blobs -->
+        <div class="blob blob-1 -top-10 left-10 w-80 h-80 bg-amber-900" style="opacity: 0.15;"></div>
+        <div class="blob blob-2 bottom-0 right-10 w-72 h-72 bg-amber-800" style="opacity: 0.1;"></div>
+        
+        <p class="mb-3 text-base font-light relative z-10">&copy; 2026 KoPinggiran Coffee Shop. Semua hak dilindungi.</p>
+        <p class="text-amber-200 font-light relative z-10">Made with ❤️ by Ajie & Patih</p>
+        <div class="mt-6 flex items-center justify-center gap-14 relative z-10">
+            <a href="https://wa.me/+6281398772337" target="_blank" class="text-amber-200 hover:text-white transition-colors"><img src="assets/icon/message-circle.svg" alt=""></a>
+            <a href="https://www.instagram.com/aldiynsh.__" target="_blank" class="text-amber-200 hover:text-white transition-colors"><img src="assets/icon/instagram.svg" alt=""></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Scroll Animation Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with data-animate
+            document.querySelectorAll('[data-animate]').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                if (!navbar) return;
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-2xl');
+                } else {
+                    navbar.classList.remove('shadow-2xl');
+                }
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Button ripple effect (exclude hamburger)
+            document.querySelectorAll('button:not(.hamburger)').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Parallax effect on scroll
+            const parallaxElements = document.querySelectorAll('[data-parallax]');
+            window.addEventListener('scroll', () => {
+                parallaxElements.forEach(el => {
+                    const scrollPosition = window.pageYOffset;
+                    const elementOffset = el.offsetTop;
+                    const distance = scrollPosition - elementOffset;
+                    el.style.transform = `translateY(${distance * 0.5}px)`;
+                });
+            });
+
+            // Mobile hamburger menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (hamburger && mobileMenu) {
+                // Toggle menu on hamburger click
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                    hamburger.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', String(!isExpanded));
+                    mobileMenu.classList.toggle('active');
+                    mobileMenu.setAttribute('aria-hidden', String(isExpanded));
+                });
+
+                // Close menu when a link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.remove('active');
+                        mobileMenu.setAttribute('aria-hidden', 'true');
+                    });
+                });
+
+                // Close menu on scroll
+                window.addEventListener('scroll', () => {
+                    if (mobileMenu.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.remove('active');
+                        mobileMenu.setAttribute('aria-hidden', 'true');
+                    }
+                });
+
+                // Close menu on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.remove('active');
+                        mobileMenu.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
